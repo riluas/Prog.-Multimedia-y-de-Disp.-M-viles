@@ -1,0 +1,22 @@
+{
+  "name": "ae3",
+  "version": "0.0.2",
+  "description": "recopilación de datos de un usuario",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riluas/Prog.-Multimedia-y-de-Disp.-M-viles.git"
+  },
+  "author": "Ricardo Lucas Asins",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/riluas/Prog.-Multimedia-y-de-Disp.-M-viles/issues"
+  },
+  "homepage": "https://github.com/riluas/Prog.-Multimedia-y-de-Disp.-M-viles#readme",
+  "dependencies": {
+    "lodash": "^4.17.20"
+  }
+}
