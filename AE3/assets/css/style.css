@@ -9,3 +9,15 @@ html{
     color: rgb(255, 151, 151);
     border: solid 1px red;
 }
+
+button{
+    cursor: pointer;
+    background-color: blue;
+    color: white;
+    border-radius: 3px;
+}
+
+button:hover{
+    background-color:rgb(255, 220, 155);
+    color: black;
+}

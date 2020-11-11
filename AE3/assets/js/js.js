@@ -16,10 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-
+//Funcion que inicia la primera pantalla
     function principal() {
         bien = false;
         document.getElementById("cButton").disabled = true;
+        document.getElementById("vButton").disabled = true;
         let divTitulo = document.createElement("DIV");
         divTitulo.setAttribute("id", "dTitulo");
         document.body.appendChild(divTitulo);
@@ -48,12 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
+    //Aqui carga la primera pantalla
     if (numPag == 0) {
         principal()
     }
-   
+
+   //Funcion que crea el formulario
     function formulario() {
+        //Activando botones
+        document.getElementById("cButton").disabled = false;
+        document.getElementById("vButton").disabled = false;
+        //Elimina la pantalla principal y la que seria la siguiente de el formulario
         if (document.getElementById("dTitulo") != null) {
             document.getElementById("dTitulo").remove();
         }
@@ -62,18 +68,19 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById("divDatos").remove();
         }
         console.log(enlace);
+
         let divForm = document.createElement("DIV");
         divForm.setAttribute("id", "dForm");
         document.body.appendChild(divForm);
 
 
-
+    //Creando el form
         let form = document.createElement("FORM");
         form.setAttribute("id", "myForm");
         document.getElementById("dForm").appendChild(form);
 
         let nameTitulo = document.createElement("P");
-        nameTitulo.textContent = "Nombre:";
+        nameTitulo.textContent = "Nombre *:";
         document.getElementById("myForm").appendChild(nameTitulo);
         let name = document.createElement("INPUT");
         name.setAttribute("type", "text");
@@ -89,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("myForm").appendChild(nameError);
     
         let surnameTitulo = document.createElement("P");
-        surnameTitulo.textContent = "Apellidos:";
+        surnameTitulo.textContent = "Apellidos *:";
         document.getElementById("myForm").appendChild(surnameTitulo);
         let surname = document.createElement("INPUT");
         surname.setAttribute("type", "text");
@@ -105,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("myForm").appendChild(surnameError);
 
         let fecha = document.createElement("P");
-        fecha.textContent = "Fecha:";
+        fecha.textContent = "Fecha *:";
         document.getElementById("myForm").appendChild(fecha);
         let dBirth = document.createElement("INPUT");
         dBirth.setAttribute("type", "date");
@@ -131,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         
         let postal = document.createElement("P");
-        postal.textContent = "Código postal:";
+        postal.textContent = "Código postal *:";
         document.getElementById("myForm").appendChild(postal);
         let pCode = document.createElement("INPUT");
         pCode.setAttribute("type", "text");
@@ -149,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // -- Select -- //
     let provin = document.createElement("P");
-    provin.textContent = "Provicincia:";
+    provin.textContent = "Provicincia *:";
     document.getElementById("myForm").appendChild(provin);
         let provincia = document.createElement("SELECT");
         provincia.setAttribute("id", "mySelect");
@@ -186,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("myForm").appendChild(provinciaError);
 
         let municipio = document.createElement("P");
-        municipio.textContent = "Municipio:";
+        municipio.textContent = "Municipio *:";
         document.getElementById("myForm").appendChild(municipio);
         let town = document.createElement("INPUT");
         town.setAttribute("type", "text");
@@ -208,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("pCode").required = true;
         document.getElementById("mySelect").required = true;
         document.getElementById("municipio").required = true;
-
+//Estos son los errores que salen arriba
         let divFormerror = document.createElement("DIV");
         divFormerror.setAttribute("id", "divFormerror");
         form.before(divFormerror);
@@ -255,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
         municipioError2.style.display= "none";
         document.getElementById("divFormerror").appendChild(municipioError2);
     }
-
+//Comprueba que los campos sean correctos y no esten vacios
     function comprobar() {
         let iNombre = document.getElementById("nombre");
         let iApellidos = document.getElementById("apellidos");
@@ -328,7 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
     }
-
+//Creando la pagina de datos
     function pagDatos() {
         numPag = 3;
         document.getElementById("dForm").remove();
@@ -394,9 +401,11 @@ document.addEventListener('DOMContentLoaded', () => {
         atras.textContent = "Atrás";
         atras.id = "atras"
         divDatos.appendChild(atras);
-         
+         //Botones de aceptar y volver atras
         document.getElementById("acep").addEventListener("click", function () {
-            
+            numPag = 4;
+            document.getElementById("divDatos").remove();
+            pagina(numPag);
         });
         
         document.getElementById("atras").addEventListener("click", function () {
@@ -405,10 +414,32 @@ document.addEventListener('DOMContentLoaded', () => {
             bien = false;
             formulario();
         });
-
-
+        document.getElementById("cButton").disabled = true;
     }
+//Ultima pagina de enhorabuena
+    function final() {
+        let divFinal = document.createElement("DIV");
+        divFinal.setAttribute("id", "divFinal");
+        document.body.appendChild(divFinal);
 
+        let apellidos = document.createElement("H2");
+        apellidos.textContent = "¡¡Enhorabuena has ganado un Iphone 7!!";
+        divFinal.appendChild(apellidos);
+
+
+        let terminar = document.createElement("BUTTON");
+        terminar.textContent = "Terminar";
+        terminar.id = "terminar"
+        divFinal.appendChild(terminar);
+
+        document.getElementById("terminar").onclick = function () {
+            location.href = enlace;
+        };
+        document.getElementById("cButton").disabled = true;
+        document.getElementById("vButton").disabled = true;
+        
+    }
+//Esta funcion sirve para comprobar en que pagina estamos y cargar la pagina correspondiente
     function pagina(pag) {
 
         if (pag == 0) {
@@ -419,7 +450,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (pag == 1) {
                 formulario()
             }
-            
             if (!bien && pag == 2) {
                 comprobar()
             }
@@ -427,8 +457,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (pag == 3) {
             pagDatos();
         }
+        if (pag == 4) {
+            final();
+        }
     }
 
+    //Boton de continuar
     document.getElementById("cButton").addEventListener("click", function () {
         if (numPag < totalPag) {
             numPag += 1;
@@ -436,7 +470,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         pagina(numPag);
     });
-
+    //Boton de volver
     document.getElementById("vButton").addEventListener("click", function () {
         if (numPag == 2 && numPag != 3) {
             numPag = 0;
