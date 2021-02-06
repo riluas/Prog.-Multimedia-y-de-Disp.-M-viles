@@ -2,6 +2,8 @@
   "name": "pmb-backoffice",
   "version": "0.1.1",
   "private": true,
+  "main": "public/electron.js",
+  "homepage": "./",
   "proxy": "https://localhost:44349",
   "dependencies": {
     "@testing-library/jest-dom": "5.11.9",
@@ -16,6 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "electron": "concurrently \"set BROWSER=none npm run start\" \"wait-on http://localhost:3000 && electron .\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -42,6 +45,7 @@
     "concurrently": "^5.3.0",
     "electron": "^11.2.3",
     "electron-builder": "^22.9.1",
+    "electron-is-dev": "^1.2.0",
     "wait-on": "^5.2.1"
   }
 }
