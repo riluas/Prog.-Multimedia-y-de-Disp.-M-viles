@@ -6,11 +6,12 @@ import Users from './paginas/bundle.js';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 
+
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
     <App/>
-    {/* <Users/>*/}
     </BrowserRouter>
     
   </React.StrictMode>,
