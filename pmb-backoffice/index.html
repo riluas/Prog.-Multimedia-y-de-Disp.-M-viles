@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>PMB Backoffice</title>
+  </head>
+  <body>
+    <h1>Haz click en el correspondiente tamaño que desees la foto</h1>
+
+    <button type="button" onclick='Imicro()'>Micro (30x40px)</button>
+    <button type="button" onclick='Imini()'>Mini (300x400px)</button>
+    <h1>Subri foto</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="avatar" multiple/>
+        <button>Submit</button>
+      </form>
+    <!-- You can also require other files to run in this process -->
+    <script src="./microMini.js"></script>
+  </body>
+</html>

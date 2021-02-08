@@ -1,33 +1,27 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, ipcMain} = require('electron')
-const path = require('path');
+const {app, BrowserWindow} = require('electron')
+const path = require('path')
+const {ipcMain} = require('electron');
 const isDev = require('electron-is-dev');
-
-let mainWindow;
-
-function createWindow() {
-  mainWindow = new BrowserWindow({
-    width: isDev? 2100 : 1280,
+function createWindow () {
+  // Create the browser window.
+  const mainWindow = new BrowserWindow({
+    width:  isDev? 2100 : 1280,
     height: 1024,
-    webPreferences: { 
+    webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      nodeItegration:true,
-    }
-  });
-
-  // and load the index.html of the app.
-  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
-
-  if (isDev) {
-    // Open the DevTools.
-    //BrowserWindow.addDevToolsExtension('<location to your react chrome extension>');
-    if(isDev){
-      mainWindow.webContents.openDevTools({mode: 'detach'});
+      nodeIntegration: true
     }
     
-  }
-  mainWindow.on('closed', () => mainWindow = null);
+  })
+  // and load the index.html of the app.
+  mainWindow.loadFile('index.html')
 
+  // Open the DevTools.
+  if(isDev){
+    mainWindow.webContents.openDevTools({mode: 'detach'});
+    //mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
+  }
 }
 
 // This method will be called when Electron has finished
@@ -41,11 +35,10 @@ app.whenReady().then(() => {
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
-  //ipcMain.on('message:hello',(event, message) => {
-   // console.log("Recived in the main process", message);
- // })
 })
-
+  ipcMain.on('message:hello',(event, message) => {
+   console.log("Recived in the main process: ", message);
+ })
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
